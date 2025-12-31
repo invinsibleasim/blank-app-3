@@ -412,3 +412,23 @@ if start_btn:
 
 st.markdown("---")
 st.caption("Tips: For EL images, gridlines/busbars are typically darker than cells. Increase kernel sizes if lines are faint; use 'adaptive' threshold for non-uniform brightness.")
+
+# === Add under your existing sidebar controls ===
+st.sidebar.header("📐 Layout preset (quick set)")
+layout_preset = st.sidebar.selectbox(
+    "Module layout preset",
+    ["None", "6×24 (144)", "12×12 (144)"],
+    index=0
+)
+
+# When a 144-preset is chosen, force manual split with those rows/cols
+if layout_preset == "6×24 (144)":
+    use_manual = True
+    n_rows, n_cols = 6, 24
+elif layout_preset == "12×12 (144)":
+    use_manual = True
+    n_rows, n_cols = 12, 12
+
+st.sidebar.header("💾 Export (144 cells)")
+save_144_to_disk = st.sidebar.checkbox("Also save 144‑cells ZIP to disk", True)
+seq_names_144 = st.sidebar.checkbox("Use sequential file names (001–144)", True)
